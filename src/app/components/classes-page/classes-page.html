@@ -1,0 +1,96 @@
+<main class="classes-page">
+  <header class="classes-page__header">
+    <a class="classes-page__brand" routerLink="/" aria-label="Vino's Dance Studio home">
+      <span class="classes-page__mark" aria-hidden="true">V<span>D</span></span>
+      <span>VINO'S <strong>DANCE STUDIO</strong></span>
+    </a>
+    <a class="classes-page__back" routerLink="/">Back to the studio <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <section class="classes-page__intro" aria-labelledby="classes-page-title">
+    <p class="eyebrow"><span></span> Find your kind of movement</p>
+    <h1 id="classes-page-title">Choose your<br /><em>rhythm.</em></h1>
+    <p>Explore every class, find a style that feels like you, and send us a request to book.</p>
+  </section>
+
+  <section class="classes-page__grid" aria-label="Available dance classes">
+    @for (danceClass of classes; track danceClass.number) {
+      <button
+        class="classes-page__card"
+        type="button"
+        (click)="openClassDetails(danceClass)"
+        [attr.aria-label]="'View details and book ' + danceClass.name"
+      >
+        <span class="classes-page__image">
+          <img [src]="danceClass.image" [alt]="danceClass.imageAlt" loading="lazy" draggable="false" />
+          <span class="classes-page__number">{{ danceClass.number }}</span>
+          <span class="classes-page__open" aria-hidden="true">↗</span>
+        </span>
+        <span class="classes-page__card-copy">
+          <span>{{ danceClass.category }}</span>
+          <strong>{{ danceClass.name }}</strong>
+          <span>{{ danceClass.level }}</span>
+        </span>
+      </button>
+    }
+  </section>
+
+  <footer class="classes-page__footer">
+    <p>Ready to find your rhythm?</p>
+    <a routerLink="/" fragment="contact">Talk to the studio <span aria-hidden="true">↗</span></a>
+  </footer>
+
+  <dialog #classDialog class="class-dialog" (close)="onDialogClose()" (click)="closeOnBackdrop($event)">
+    @if (selectedClass(); as danceClass) {
+      <div class="class-dialog__layout">
+        <div class="class-dialog__visual">
+          <img [src]="danceClass.image" [alt]="danceClass.imageAlt" />
+          <span>{{ danceClass.category }}</span>
+        </div>
+        <div class="class-dialog__content">
+          <button class="class-dialog__close" type="button" aria-label="Close class details" (click)="closeClassDetails()">×</button>
+          <p class="eyebrow"><span></span> Class {{ danceClass.number }} / {{ danceClass.level }}</p>
+          <h2>{{ danceClass.name }}</h2>
+          <p class="class-dialog__description">{{ danceClass.description }}</p>
+
+          <div class="class-dialog__details">
+            <div>
+              <span>Timings</span>
+              <strong>{{ danceClass.schedule }}</strong>
+            </div>
+            <div>
+              <span>Fee</span>
+              <strong>{{ danceClass.fee }}</strong>
+            </div>
+          </div>
+
+          @if (bookingSent()) {
+            <p class="class-dialog__success" role="status">
+              Your booking request is ready. This demo does not send or store your details.
+            </p>
+          } @else {
+            <form class="class-dialog__form" (submit)="submitBooking($event)">
+              <p class="class-dialog__form-title">Request a place</p>
+              <label>
+                <span>Your name <i aria-hidden="true">*</i></span>
+                <input name="name" type="text" autocomplete="name" placeholder="e.g. Alex Morgan" required />
+              </label>
+              <div class="class-dialog__form-row">
+                <label>
+                  <span>Email address <i aria-hidden="true">*</i></span>
+                  <input name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+                </label>
+                <label>
+                  <span>Phone number</span>
+                  <input name="phone" type="tel" autocomplete="tel" placeholder="Optional" />
+                </label>
+              </div>
+              <button class="class-dialog__submit" type="submit">Request to book <span aria-hidden="true">↗</span></button>
+              <p class="class-dialog__note">UI demo only — your details are not sent or saved.</p>
+            </form>
+          }
+        </div>
+      </div>
+    }
+  </dialog>
+</main>

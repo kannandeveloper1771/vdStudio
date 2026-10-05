@@ -1,0 +1,51 @@
+<section class="contact-section" id="contact" aria-labelledby="contact-title">
+  <div class="contact-copy">
+    <p class="eyebrow eyebrow-dark"><span></span> Your next step starts here</p>
+    <h2 id="contact-title">Ready when<br />you <em>are.</em></h2>
+    <p>Tell us a little about yourself and what you’d love to learn. We’ll help you find your rhythm.</p>
+    <a class="contact-email" href="mailto:hello@vinosdance.com">
+      hello@vinosdance.com <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+
+  <form class="contact-form" (submit)="submitContact($event)">
+    <div class="contact-form__heading">
+      <span>LET’S GET YOU MOVING</span>
+      <span>TAKES LESS THAN A MINUTE</span>
+    </div>
+
+    <div class="contact-form__fields">
+      <label class="contact-form__field">
+        <span>Your name <span aria-hidden="true">*</span></span>
+        <input name="name" type="text" autocomplete="name" placeholder="e.g. Alex Morgan" required />
+      </label>
+      <label class="contact-form__field">
+        <span>Email address <span aria-hidden="true">*</span></span>
+        <input name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+      </label>
+      <label class="contact-form__field">
+        <span>Phone number <small>Optional</small></span>
+        <input name="phone" type="tel" autocomplete="tel" placeholder="+1 (555) 000-0000" />
+      </label>
+      <label class="contact-form__field">
+        <span>Your class</span>
+        <select name="class">
+          <option value="">Not sure yet</option>
+          <option>Hip Hop</option>
+          <option>Bollywood</option>
+          <option>Contemporary</option>
+          <option>Dance Fitness</option>
+          <option>Salsa &amp; Latin</option>
+          <option>Kids Dance</option>
+          <option>Freestyle</option>
+          <option>Wedding Dance</option>
+        </select>
+      </label>
+    </div>
+
+    <button class="contact-form__submit" type="submit">
+      Send an enquiry <span aria-hidden="true">↗</span>
+    </button>
+    <p class="contact-form__note">This opens a pre-filled email in your email app.</p>
+  </form>
+</section>

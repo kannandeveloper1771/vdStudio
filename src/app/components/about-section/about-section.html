@@ -1,0 +1,55 @@
+<section class="intro-section about-section" id="about" aria-labelledby="about-title">
+  <div class="about-visual">
+    <div class="about-years">
+      <p class="about-kicker">Our story, still unfolding</p>
+      <p class="about-years-title">Years <em>in motion.</em></p>
+      <p class="about-years-note">Growing together, one beat at a time.</p>
+    </div>
+    <a class="about-shield" href="#classes" aria-label="Explore Vino's Dance Studio classes">
+      <div class="shield-photo-grid" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=500&q=80" alt="" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1518834107812-67b0b7c58434?auto=format&fit=crop&w=500&q=80" alt="" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1547153760-18fc86324498?auto=format&fit=crop&w=500&q=80" alt="" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1504609813442-a8924e83f76e?auto=format&fit=crop&w=500&q=80" alt="" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=500&q=80" alt="" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=500&q=80" alt="" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=500&q=80&sat=-30" alt="" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1518834107812-67b0b7c58434?auto=format&fit=crop&w=500&q=80&sat=-30" alt="" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1547153760-18fc86324498?auto=format&fit=crop&w=500&q=80&sat=-30" alt="" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1504609813442-a8924e83f76e?auto=format&fit=crop&w=500&q=80&sat=-30" alt="" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=500&q=80&sat=-30" alt="" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=500&q=80&sat=-30" alt="" loading="lazy" />
+      </div>
+      <span class="vds-overlay" aria-hidden="true">
+        <img class="vds-logo" src="/logo.jpeg" alt="" />
+      </span>
+    </a>
+  </div>
+
+  <div class="intro-copy about-copy">
+    <div class="about-copy-heading">
+      <p class="eyebrow eyebrow-dark">More than the moves</p>
+      <!-- <span class="about-copy-index">01 <i></i> STUDIO STORY</span> -->
+    </div>
+    <h2 id="about-title">Dance starts<br />where <em>you are.</em></h2>
+    <p class="about-lead">A welcoming studio can change the way you move, feel, and show up for yourself.</p>
+    <p>At Vino's, dance is for everybody. Come to discover a new style, build confidence one count at a time, or simply find the joy in moving with other people.</p>
+    <p>There is no perfect first step. There is just your step, your pace, and a community ready to cheer you on.</p>
+    <div #aboutMetrics class="about-metrics" aria-label="Vino's Dance Studio experience and students">
+      <div class="about-metric" [attr.aria-label]="experienceCount() + ' years of dance experience'">
+        <p><span>{{ experienceCount() }}</span><sup>+</sup></p>
+        <span>Years of experience</span>
+      </div>
+      <div class="about-metric" [attr.aria-label]="studentsCount() + ' students inspired'">
+        <p><span>{{ studentsCount() }}</span><sup>+</sup></p>
+        <span>Students inspired</span>
+      </div>
+    </div>
+    <!-- <ul class="about-values" aria-label="What matters at Vino's">
+      <li><span>01</span><strong>Everyone belongs</strong></li>
+      <li><span>02</span><strong>Progress over perfection</strong></li>
+      <li><span>03</span><strong>Better together</strong></li>
+    </ul> -->
+    <a class="dark-link" href="#classes">Explore the classes <span aria-hidden="true">↗</span></a>
+  </div>
+</section>

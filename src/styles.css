@@ -1,1 +1,37 @@
-/* You can add global styles to this file, and also import other style files */
+@import './app/app.css';
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+	scroll-padding-top: 88px;
+}
+
+body {
+	margin: 0;
+	background: #090a0b;
+	color: #f5f4f0;
+	font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
+	-webkit-font-smoothing: antialiased;
+}
+
+body,
+button,
+a {
+	font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
+}
+
+a {
+	color: inherit;
+}
+
+button {
+	color: inherit;
+}
+
+::selection {
+	background: #ed1464;
+	color: #fff;
+}

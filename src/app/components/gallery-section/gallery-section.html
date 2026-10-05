@@ -1,0 +1,23 @@
+<section class="gallery-preview" id="gallery" aria-labelledby="gallery-title">
+  <div class="gallery-preview__heading">
+    <div class="gallery-preview__copy">
+      <p class="eyebrow"><span></span> The Vino's feeling</p>
+      <h2 id="gallery-title">Good people.<br /><em>Great moves.</em></h2>
+      <p>First steps, big laughs, and the moments in between. Take a look around our studio.</p>
+    </div>
+    <a class="gallery-preview__all" routerLink="/gallery">
+      View all moments <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+
+  <div class="gallery-preview__grid" aria-label="A few moments from the studio">
+    @for (photo of photos; track photo.number) {
+      <a class="gallery-preview__card" routerLink="/gallery" [attr.aria-label]="'View photo: ' + photo.title">
+        <img [src]="photo.image" [alt]="photo.imageAlt" loading="lazy" draggable="false" />
+        <span class="gallery-preview__shade"></span>
+        <span class="gallery-preview__number">{{ photo.number }}</span>
+        <span class="gallery-preview__caption">{{ photo.title }} <span aria-hidden="true">↗</span></span>
+      </a>
+    }
+  </div>
+</section>

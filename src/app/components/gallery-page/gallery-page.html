@@ -1,0 +1,32 @@
+<main class="gallery-page">
+  <header class="gallery-page__header">
+    <a class="gallery-page__brand" routerLink="/" aria-label="Vino's Dance Studio home">
+      <span class="gallery-page__mark" aria-hidden="true">V<span>D</span></span>
+      <span>VINO'S <strong>DANCE STUDIO</strong></span>
+    </a>
+    <a class="gallery-page__back" routerLink="/">Back to the studio <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <section class="gallery-page__intro" aria-labelledby="gallery-page-title">
+    <p class="eyebrow"><span></span> A little life at Vino's</p>
+    <h1 id="gallery-page-title">The studio,<br /><em>in motion.</em></h1>
+    <p>Every class has its own rhythm. Here are a few of the faces, feelings, and favorite moments that make ours.</p>
+  </section>
+
+  <section class="gallery-page__grid" aria-label="Studio photo gallery">
+    @for (photo of photos; track photo.number) {
+      <figure class="gallery-page__photo">
+        <div class="gallery-page__image">
+          <img [src]="photo.image" [alt]="photo.imageAlt" loading="lazy" draggable="false" />
+          <span class="gallery-page__number">{{ photo.number }}</span>
+        </div>
+        <figcaption>{{ photo.title }}</figcaption>
+      </figure>
+    }
+  </section>
+
+  <footer class="gallery-page__footer">
+    <p>Found your rhythm?</p>
+    <a routerLink="/" fragment="contact">Come dance with us <span aria-hidden="true">↗</span></a>
+  </footer>
+</main>

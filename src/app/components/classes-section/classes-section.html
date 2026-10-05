@@ -1,0 +1,54 @@
+<section class="classes-section" id="classes" aria-labelledby="classes-title">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow"><span></span> Find your kind of movement</p>
+      <h2 id="classes-title">Find your <em>rhythm.</em></h2>
+    </div>
+    <div class="classes-heading-side">
+      <p>Explore a style, follow the music,<br />and find the class that feels like you.</p>
+      <div class="classes-controls" aria-label="Class carousel controls">
+        <button type="button" aria-label="Scroll to previous classes" title="Previous classes" (click)="scrollClasses(-1)">←</button>
+        <button type="button" aria-label="Scroll to next classes" title="Next classes" (click)="scrollClasses(1)">→</button>
+      </div>
+    </div>
+  </div>
+  <div
+    #classTrack
+    class="class-track"
+    role="region"
+    aria-label="Dance classes carousel"
+    tabindex="0"
+    (pointerdown)="startTrackDrag($event)"
+    (pointermove)="moveTrackDrag($event)"
+    (pointerup)="endTrackDrag($event)"
+    (pointercancel)="endTrackDrag($event)"
+    (click)="suppressDraggedClick($event)"
+  >
+    @for (danceClass of classes; track danceClass.number) {
+      <a
+        class="class-card"
+        [routerLink]="['/classes']"
+        [queryParams]="{ class: danceClass.number }"
+        [attr.aria-label]="danceClass.name + '. ' + danceClass.description + ' View details and book this class.'"
+      >
+        <span class="class-card-inner">
+          <span class="class-card-face class-card-front">
+            <img class="class-card-image" [src]="danceClass.image" [alt]="danceClass.imageAlt" loading="lazy" draggable="false" />
+            <span class="class-card-shade"></span>
+            <span class="class-card-top"><span>{{ danceClass.category }}</span><span>{{ danceClass.number }}</span></span>
+            <span class="class-card-name">{{ danceClass.name }}</span>
+            <span class="class-card-prompt">Explore class <span aria-hidden="true">↗</span></span>
+          </span>
+          <span class="class-card-face class-card-back">
+            <span class="class-card-back-index">VINO'S CLASS <i></i> {{ danceClass.number }}</span>
+            <span class="class-card-back-name">{{ danceClass.name }}</span>
+            <span class="class-card-description">{{ danceClass.description }}</span>
+            <span class="class-card-level"><span>LEVEL</span>{{ danceClass.level }}</span>
+            <span class="class-card-link">Book or ask about this class <span aria-hidden="true">↗</span></span>
+          </span>
+        </span>
+      </a>
+    }
+  </div>
+  <p class="classes-hint"><span></span> Drag to explore <i></i> Hover or focus a card for details and booking</p>
+</section>

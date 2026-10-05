@@ -1,0 +1,50 @@
+<section class="hero" id="home" aria-labelledby="hero-title">
+  @for (slide of [activeSlide()]; track slide.id) {
+    <div class="hero-background" aria-hidden="true">
+      <video class="hero-video" [src]="slide.video" [poster]="slide.poster" autoplay muted loop playsinline tabindex="-1"></video>
+      <div class="hero-shade"></div>
+    </div>
+  }
+
+  <div class="hero-copy">
+    <p class="eyebrow hero-eyebrow"><span></span> Dance <i></i> Fitness <i></i> Community</p>
+    <h1 id="hero-title">Vino's<br /><em>Dance Studio</em></h1>
+    <p class="hero-intro">Find your people. Find your pace. Make every beat your own.</p>
+    @for (slide of [activeSlide()]; track slide.id) {
+      <blockquote class="hero-quote" aria-live="polite">“{{ slide.quote }}”</blockquote>
+    }
+    <div class="hero-actions">
+      <a class="button button-primary" href="#classes">Explore classes <span aria-hidden="true">↗</span></a>
+      <a class="text-link" href="#about">Meet the studio <span aria-hidden="true">↓</span></a>
+    </div>
+  </div>
+
+  <div class="hero-carousel" role="group" aria-label="Dance video carousel controls">
+    <div class="carousel-thumbnails">
+      @for (slide of slides; track slide.id; let index = $index) {
+        <button
+          class="carousel-thumbnail"
+          type="button"
+          [class.is-active]="activeIndex() === index"
+          [attr.aria-label]="'Show ' + slide.name + ' video and quote'"
+          [attr.aria-pressed]="activeIndex() === index"
+          (click)="selectVideo(index)"
+        >
+          <img [src]="slide.poster" alt="" />
+          <span>{{ slide.name }}</span>
+        </button>
+      }
+    </div>
+    <!-- <div class="carousel-actions">
+      <button type="button" aria-label="Previous dance video" title="Previous video" (click)="previousVideo()">←</button>
+      <button
+        type="button"
+        class="carousel-autoplay"
+        [attr.aria-label]="autoAdvance() ? 'Pause automatic video changes' : 'Play automatic video changes'"
+        [attr.title]="autoAdvance() ? 'Pause carousel' : 'Play carousel'"
+        (click)="toggleAutoAdvance()"
+      >{{ autoAdvance() ? 'Ⅱ' : '▶' }}</button>
+      <button type="button" aria-label="Next dance video" title="Next video" (click)="nextVideo()">→</button>
+    </div> -->
+  </div>
+</section>

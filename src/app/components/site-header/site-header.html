@@ -1,0 +1,24 @@
+<header class="site-header">
+  <a class="brand" href="#home" aria-label="Vino's Dance Studio home" (click)="closeMenu()">
+    <span class="brand-mark" aria-hidden="true">V<span>D</span></span>
+    <span class="brand-name">Vino's <strong>Dance Studio</strong><small>Dance <i></i> Fitness</small></span>
+  </a>
+  <button
+    class="menu-toggle"
+    type="button"
+    [attr.aria-expanded]="menuOpen()"
+    aria-controls="primary-navigation"
+    [attr.aria-label]="menuOpen() ? 'Close navigation menu' : 'Open navigation menu'"
+    (click)="toggleMenu()"
+  >
+    <span></span><span></span>
+  </button>
+  <nav id="primary-navigation" class="primary-navigation" [class.is-open]="menuOpen()" aria-label="Main navigation">
+    <a href="#home" (click)="closeMenu()">Home</a>
+    <a href="#about" (click)="closeMenu()">About</a>
+    <a routerLink="/classes" (click)="closeMenu()">Classes</a>
+    <a href="#gallery" (click)="closeMenu()">Gallery</a>
+    <a href="#contact" (click)="closeMenu()">Contact</a>
+    <a class="nav-cta" routerLink="/classes" (click)="closeMenu()">Find your rhythm <span aria-hidden="true">↗</span></a>
+  </nav>
+</header>
