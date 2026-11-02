@@ -1,41 +1,80 @@
 <section class="contact-section" id="contact" aria-labelledby="contact-title">
-  <div class="contact-copy">
-    <p class="eyebrow eyebrow-dark"><span></span> Your next step starts here</p>
-    <h2 id="contact-title">Ready when<br />you <em>are.</em></h2>
-    <p>Tell us a little about yourself and what you’d love to learn. We’ll help you find your rhythm.</p>
-    <a class="contact-email" href="mailto:hello@vinosdance.com">
-      hello@vinosdance.com <span aria-hidden="true">↗</span>
-    </a>
+  <div class="contact-visual" aria-hidden="true">
+    <img src="/assets/images/img6.jpg" alt="" loading="lazy" />
   </div>
 
-  <form class="contact-form" (submit)="submitContact($event)">
+  <div class="contact-copy" appScrollReveal>
+    <p class="eyebrow"><span></span> LET’S CONNECT <i></i></p>
+    <h2 id="contact-title">Let’s make<br />your next move <em>unforgettable.</em></h2>
+    <p class="contact-copy__intro">
+      Have questions? Want to join our dance family? We’d love to hear from you.
+    </p>
+
+    <a class="contact-detail" href="mailto:hello@vinosdance.com">
+      <span class="contact-detail__icon" aria-hidden="true">✉</span>
+      <span>hello@vinosdance.com</span>
+    </a>
+
+    <nav class="contact-socials" aria-label="Follow Vino's Dance Studio">
+      <span>Follow us</span>
+      <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle class="contact-social-dot" cx="18" cy="6" r="1" /></svg>
+      </a>
+      <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.5 1.6-1.5h1.7V3.9c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3V10H7.3v3h2.8v8h3.4Z" /></svg>
+      </a>
+      <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2a2.8 2.8 0 0 0-2-2C17.9 4.7 12 4.7 12 4.7s-5.9 0-7.6.5a2.8 2.8 0 0 0-2 2A29 29 0 0 0 2 12a29 29 0 0 0 .4 4.8 2.8 2.8 0 0 0 2 2c1.7.5 7.6.5 7.6.5s5.9 0 7.6-.5a2.8 2.8 0 0 0 2-2A29 29 0 0 0 22 12a29 29 0 0 0-.4-4.8Z" /><path class="contact-social-play" d="m10 15.5 5-3.5-5-3.5v7Z" /></svg>
+      </a>
+    </nav>
+  </div>
+
+  <form class="contact-form" appScrollReveal (submit)="submitContact($event)" aria-labelledby="contact-form-title">
     <div class="contact-form__heading">
-      <span>LET’S GET YOU MOVING</span>
-      <span>TAKES LESS THAN A MINUTE</span>
+      <h3 id="contact-form-title">Send us a <em>message</em></h3>
+      <p>We’d love to help you get started.</p>
+      <div class="contact-form__divider" aria-hidden="true"><span>✦</span></div>
+      <span class="contact-form__required">* REQUIRED FIELDS</span>
     </div>
 
     <div class="contact-form__fields">
       <label class="contact-form__field">
-        <span>Your name <span aria-hidden="true">*</span></span>
+        <span>Your name <b aria-hidden="true">*</b></span>
         <input name="name" type="text" autocomplete="name" placeholder="e.g. Alex Morgan" required />
       </label>
       <label class="contact-form__field">
-        <span>Email address <span aria-hidden="true">*</span></span>
+        <span>Email address <b aria-hidden="true">*</b></span>
         <input name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
       </label>
       <label class="contact-form__field">
-        <span>Phone number <small>Optional</small></span>
-        <input name="phone" type="tel" autocomplete="tel" placeholder="+1 (555) 000-0000" />
+        <span>Age <b aria-hidden="true">*</b></span>
+        <input name="age" type="number" min="5" max="100" inputmode="numeric" placeholder="Your age" required />
       </label>
       <label class="contact-form__field">
-        <span>Your class</span>
-        <select name="class">
-          <option value="">Not sure yet</option>
+        <span>Gender <b aria-hidden="true">*</b></span>
+        <select name="gender" required>
+          <option value="">Select gender</option>
+          <option>Woman</option>
+          <option>Man</option>
+          <option>Non-binary</option>
+          <option>Prefer not to say</option>
+        </select>
+      </label>
+      <label class="contact-form__field">
+        <span>Phone number <b aria-hidden="true">*</b></span>
+        <input name="phone" type="tel" autocomplete="tel" placeholder="Your phone number" required />
+      </label>
+      <label class="contact-form__field">
+        <span>Class you want to get <b aria-hidden="true">*</b></span>
+        <select name="class" required>
+          <option value="">Choose your class</option>
           <option>Hip Hop</option>
           <option>Bollywood</option>
           <option>Contemporary</option>
           <option>Dance Fitness</option>
           <option>Salsa &amp; Latin</option>
+          <option>Kathak</option>
+          <option>Gymnastics</option>
           <option>Kids Dance</option>
           <option>Freestyle</option>
           <option>Wedding Dance</option>
@@ -44,8 +83,8 @@
     </div>
 
     <button class="contact-form__submit" type="submit">
-      Send an enquiry <span aria-hidden="true">↗</span>
+      Send my enquiry <span aria-hidden="true">→</span>
     </button>
-    <p class="contact-form__note">This opens a pre-filled email in your email app.</p>
+    <p class="contact-form__note">We’ll use these details to help find the right class for you.</p>
   </form>
 </section>

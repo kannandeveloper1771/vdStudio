@@ -1,5 +1,8 @@
 <section class="classes-section" id="classes" aria-labelledby="classes-title">
-  <div class="section-heading">
+  <div class="classes-section__visual" aria-hidden="true">
+    <img src="/assets/images/img9.jpg" alt="" loading="lazy" />
+  </div>
+  <div class="section-heading" appScrollReveal>
     <div>
       <p class="eyebrow"><span></span> Find your kind of movement</p>
       <h2 id="classes-title">Find your <em>rhythm.</em></h2>
@@ -27,6 +30,7 @@
     @for (danceClass of classes; track danceClass.number) {
       <a
         class="class-card"
+        appScrollReveal
         [routerLink]="['/classes']"
         [queryParams]="{ class: danceClass.number }"
         [attr.aria-label]="danceClass.name + '. ' + danceClass.description + ' View details and book this class.'"
@@ -35,7 +39,7 @@
           <span class="class-card-face class-card-front">
             <img class="class-card-image" [src]="danceClass.image" [alt]="danceClass.imageAlt" loading="lazy" draggable="false" />
             <span class="class-card-shade"></span>
-            <span class="class-card-top"><span>{{ danceClass.category }}</span><span>{{ danceClass.number }}</span></span>
+            <span class="class-card-top"><span>{{ danceClass.number }}</span><span aria-hidden="true"></span></span>
             <span class="class-card-name">{{ danceClass.name }}</span>
             <span class="class-card-prompt">Explore class <span aria-hidden="true">↗</span></span>
           </span>

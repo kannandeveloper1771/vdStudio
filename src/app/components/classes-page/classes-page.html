@@ -7,7 +7,7 @@
     <a class="classes-page__back" routerLink="/">Back to the studio <span aria-hidden="true">↗</span></a>
   </header>
 
-  <section class="classes-page__intro" aria-labelledby="classes-page-title">
+  <section class="classes-page__intro" appScrollReveal aria-labelledby="classes-page-title">
     <p class="eyebrow"><span></span> Find your kind of movement</p>
     <h1 id="classes-page-title">Choose your<br /><em>rhythm.</em></h1>
     <p>Explore every class, find a style that feels like you, and send us a request to book.</p>
@@ -17,6 +17,7 @@
     @for (danceClass of classes; track danceClass.number) {
       <button
         class="classes-page__card"
+        appScrollReveal
         type="button"
         (click)="openClassDetails(danceClass)"
         [attr.aria-label]="'View details and book ' + danceClass.name"
@@ -35,7 +36,7 @@
     }
   </section>
 
-  <footer class="classes-page__footer">
+  <footer class="classes-page__footer" appScrollReveal>
     <p>Ready to find your rhythm?</p>
     <a routerLink="/" fragment="contact">Talk to the studio <span aria-hidden="true">↗</span></a>
   </footer>

@@ -1,8 +1,10 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild, signal } from '@angular/core';
+import { ScrollRevealDirective } from '../../shared/scroll-reveal.directive';
 
 @Component({
   selector: 'app-about-section',
   standalone: true,
+  imports: [ScrollRevealDirective],
   templateUrl: './about-section.html',
   styleUrl: './about-section.css',
 })

@@ -18,14 +18,19 @@ describe('App', () => {
 
     expect(fixture.componentInstance).toBeTruthy();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain("Vino's");
+    expect(compiled.querySelector('h1')?.textContent).toContain('Vino’s');
     expect(compiled.querySelector('app-site-header')).toBeTruthy();
     expect(compiled.querySelector('app-classes-section')).toBeTruthy();
     expect(compiled.querySelector('app-gallery-section')).toBeTruthy();
+    expect(compiled.querySelector('app-instagram-feed')).toBeTruthy();
+    expect(compiled.querySelectorAll('.instagram-feed__photo').length).toBe(6);
     expect(compiled.querySelector('app-site-footer')).toBeTruthy();
     expect(compiled.querySelector('#contact input[name="name"][required]')).toBeTruthy();
+    expect(compiled.querySelector('#contact input[name="age"][required]')).toBeTruthy();
+    expect(compiled.querySelector('#contact select[name="gender"][required]')).toBeTruthy();
+    expect(compiled.querySelector('#contact input[name="phone"][required]')).toBeTruthy();
     expect(compiled.querySelector('#contact input[name="email"][type="email"][required]')).toBeTruthy();
-    expect(compiled.querySelector('#contact select[name="class"] option[value=""]')).toBeTruthy();
+    expect(compiled.querySelector('#contact select[name="class"][required] option[value=""]')).toBeTruthy();
   });
 
   it('should render the full gallery on its own route', async () => {

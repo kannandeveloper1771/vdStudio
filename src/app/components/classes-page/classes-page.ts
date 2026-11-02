@@ -2,11 +2,12 @@ import { AfterViewInit, Component, ElementRef, inject, signal, viewChild } from 
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DANCE_CLASSES } from '../classes-section/classes-section';
 import type { DanceClass } from '../classes-section/classes-section';
+import { ScrollRevealDirective } from '../../shared/scroll-reveal.directive';
 
 @Component({
   selector: 'app-classes-page',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, ScrollRevealDirective],
   templateUrl: './classes-page.html',
   styleUrl: './classes-page.css',
 })

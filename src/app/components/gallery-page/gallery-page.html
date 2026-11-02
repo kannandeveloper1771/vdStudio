@@ -7,7 +7,7 @@
     <a class="gallery-page__back" routerLink="/">Back to the studio <span aria-hidden="true">↗</span></a>
   </header>
 
-  <section class="gallery-page__intro" aria-labelledby="gallery-page-title">
+  <section class="gallery-page__intro" appScrollReveal aria-labelledby="gallery-page-title">
     <p class="eyebrow"><span></span> A little life at Vino's</p>
     <h1 id="gallery-page-title">The studio,<br /><em>in motion.</em></h1>
     <p>Every class has its own rhythm. Here are a few of the faces, feelings, and favorite moments that make ours.</p>
@@ -15,7 +15,7 @@
 
   <section class="gallery-page__grid" aria-label="Studio photo gallery">
     @for (photo of photos; track photo.number) {
-      <figure class="gallery-page__photo">
+      <figure class="gallery-page__photo" appScrollReveal>
         <div class="gallery-page__image">
           <img [src]="photo.image" [alt]="photo.imageAlt" loading="lazy" draggable="false" />
           <span class="gallery-page__number">{{ photo.number }}</span>
@@ -25,7 +25,7 @@
     }
   </section>
 
-  <footer class="gallery-page__footer">
+  <footer class="gallery-page__footer" appScrollReveal>
     <p>Found your rhythm?</p>
     <a routerLink="/" fragment="contact">Come dance with us <span aria-hidden="true">↗</span></a>
   </footer>

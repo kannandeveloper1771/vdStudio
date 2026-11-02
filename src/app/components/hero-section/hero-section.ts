@@ -1,64 +1,79 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { interval } from 'rxjs';
+import { ScrollRevealDirective } from '../../shared/scroll-reveal.directive';
 
 @Component({
   selector: 'app-hero-section',
   standalone: true,
+  imports: [ScrollRevealDirective],
   templateUrl: './hero-section.html',
   styleUrl: './hero-section.css',
 })
 export class HeroSection {
-  protected readonly slides = [
-    {
-      id: 'studio-flow',
-      name: 'Studio flow',
-      poster: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=1800&q=85',
-      video: 'https://videos.pexels.com/video-files/3195394/3195394-hd_1920_1080_25fps.mp4',
-      quote: 'Take up space. Take the step. Trust the rhythm.',
-    },
-    {
-      id: 'find-your-groove',
-      name: 'Find your groove',
-      poster: 'https://images.unsplash.com/photo-1518834107812-67b0b7c58434?auto=format&fit=crop&w=1800&q=85',
-      video: 'https://videos.pexels.com/video-files/3129671/3129671-hd_1920_1080_25fps.mp4',
-      quote: 'Confidence is built one count before the music drops.',
-    },
-    {
-      id: 'move-together',
-      name: 'Move together',
-      poster: 'https://images.unsplash.com/photo-1504609813442-a8924e83f76e?auto=format&fit=crop&w=1800&q=85',
-      video: 'https://videos.pexels.com/video-files/3129614/3129614-hd_1920_1080_25fps.mp4',
-      quote: 'Some days you lead the dance. Some days the music does.',
-    },
+  private readonly imageUrls = [
+    '/assets/images/im3.jpg',
+    '/assets/images/image1.jpg',
+    '/assets/images/image2.jpg',
+    '/assets/images/img4.jpg',
+    '/assets/images/img5.jpg',
+    '/assets/images/img6.jpg',
+    '/assets/images/img7.jpg',
+    '/assets/images/img8.jpg',
   ];
-  protected readonly activeIndex = signal(0);
-  protected readonly activeSlide = computed(() => this.slides[this.activeIndex()]);
-  protected readonly autoAdvance = signal(true);
+  protected readonly imageSlots = signal(
+    this.imageUrls
+      .slice(0, 5)
+      .map((src, id) => ({ id, src, replacement: null as string | null })),
+  );
+  private readonly availableImages = signal(this.imageUrls.slice(5));
 
   constructor() {
-    interval(8000)
+    interval(1500)
       .pipe(takeUntilDestroyed())
       .subscribe(() => {
-        if (this.autoAdvance()) {
-          this.nextVideo();
-        }
+        this.replaceNextImage();
       });
   }
 
-  protected selectVideo(index: number): void {
-    this.activeIndex.set(index);
+  protected finishReplacement(index: number): void {
+    const slot = this.imageSlots()[index];
+    if (!slot || !slot.replacement) {
+      return;
+    }
+
+    const replacement = slot.replacement;
+    this.imageSlots.update((slots) =>
+      slots.map((currentSlot, slotIndex) =>
+        slotIndex === index
+          ? { ...currentSlot, src: replacement, replacement: null }
+          : currentSlot,
+      ),
+    );
+    this.availableImages.update((images) => [...images, slot.src]);
   }
 
-  protected nextVideo(): void {
-    this.activeIndex.update((index) => (index + 1) % this.slides.length);
-  }
+  private replaceNextImage(): void {
+    const availableSlots = this.imageSlots()
+      .map((slot, index) => ({ slot, index }))
+      .filter(({ slot }) => slot.replacement === null);
+    const images = this.availableImages();
 
-  protected previousVideo(): void {
-    this.activeIndex.update((index) => (index - 1 + this.slides.length) % this.slides.length);
-  }
+    if (availableSlots.length === 0 || images.length === 0) {
+      return;
+    }
 
-  protected toggleAutoAdvance(): void {
-    this.autoAdvance.update((isPlaying) => !isPlaying);
+    const selectedSlot = availableSlots[Math.floor(Math.random() * availableSlots.length)];
+    const selectedImageIndex = Math.floor(Math.random() * images.length);
+    const replacement = images[selectedImageIndex];
+
+    this.availableImages.update((available) =>
+      available.filter((_, index) => index !== selectedImageIndex),
+    );
+    this.imageSlots.update((slots) =>
+      slots.map((slot, slotIndex) =>
+        slotIndex === selectedSlot.index ? { ...slot, replacement } : slot,
+      ),
+    );
   }
 }

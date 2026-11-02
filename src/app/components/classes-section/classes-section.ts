@@ -1,5 +1,6 @@
 import { Component, ElementRef, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ScrollRevealDirective } from '../../shared/scroll-reveal.directive';
 
 export interface DanceClass {
   name: string;
@@ -107,7 +108,7 @@ export const DANCE_CLASSES: DanceClass[] = [
 @Component({
   selector: 'app-classes-section',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, ScrollRevealDirective],
   templateUrl: './classes-section.html',
   styleUrl: './classes-section.css',
 })

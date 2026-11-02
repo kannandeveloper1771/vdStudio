@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ScrollRevealDirective } from '../../shared/scroll-reveal.directive';
 
 export const GALLERY_PHOTOS = [
   {
@@ -49,7 +50,7 @@ export const GALLERY_PHOTOS = [
 @Component({
   selector: 'app-gallery-section',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, ScrollRevealDirective],
   templateUrl: './gallery-section.html',
   styleUrl: './gallery-section.css',
 })
