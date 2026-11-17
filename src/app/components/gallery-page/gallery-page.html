@@ -1,32 +1,142 @@
-<main class="gallery-page">
-  <header class="gallery-page__header">
-    <a class="gallery-page__brand" routerLink="/" aria-label="Vino's Dance Studio home">
-      <span class="gallery-page__mark" aria-hidden="true">V<span>D</span></span>
-      <span>VINO'S <strong>DANCE STUDIO</strong></span>
+<main class="gallery-page" id="top">
+  <header class="gallery-header">
+    <a class="gallery-brand" routerLink="/" aria-label="Vino's Dance Studio home">
+      <span class="gallery-brand__mark" aria-hidden="true">V<span>D</span></span>
+      <span class="gallery-brand__name">VINO'S<small>DANCE STUDIO</small></span>
     </a>
-    <a class="gallery-page__back" routerLink="/">Back to the studio <span aria-hidden="true">↗</span></a>
+
+    <nav class="gallery-nav" aria-label="Main navigation">
+      <a routerLink="/" fragment="home">Home</a>
+      <a routerLink="/" fragment="about">About</a>
+      <a routerLink="/classes">Classes</a>
+      <a class="is-current" routerLink="/gallery" aria-current="page">Gallery</a>
+      <a routerLink="/" fragment="contact">Contact</a>
+    </nav>
+
+    <a class="gallery-header__cta" routerLink="/classes">
+      Join now <span aria-hidden="true">→</span>
+    </a>
   </header>
 
-  <section class="gallery-page__intro" appScrollReveal aria-labelledby="gallery-page-title">
-    <p class="eyebrow"><span></span> A little life at Vino's</p>
-    <h1 id="gallery-page-title">The studio,<br /><em>in motion.</em></h1>
-    <p>Every class has its own rhythm. Here are a few of the faces, feelings, and favorite moments that make ours.</p>
+  <section class="gallery-hero" aria-labelledby="gallery-title">
+    <img class="gallery-hero__image" src="/assets/images/img6.jpg" alt="" fetchpriority="high" />
+    <div class="gallery-hero__content">
+      <p class="gallery-hero__eyebrow"><span></span> VINO'S DANCE STUDIO <span></span></p>
+      <h1 id="gallery-title">Gallery<span class="gallery-hero__crown" aria-hidden="true">✦</span></h1>
+      <p class="gallery-hero__tagline">Moments in <em>motion</em></p>
+    </div>
+    <a class="gallery-hero__scroll" href="#gallery-collection">
+      <span>Explore the moments</span><span aria-hidden="true">↓</span>
+    </a>
   </section>
 
-  <section class="gallery-page__grid" aria-label="Studio photo gallery">
-    @for (photo of photos; track photo.number) {
-      <figure class="gallery-page__photo" appScrollReveal>
-        <div class="gallery-page__image">
-          <img [src]="photo.image" [alt]="photo.imageAlt" loading="lazy" draggable="false" />
-          <span class="gallery-page__number">{{ photo.number }}</span>
-        </div>
-        <figcaption>{{ photo.title }}</figcaption>
-      </figure>
+  <nav class="gallery-filters" aria-label="Filter photos by category">
+    @for (category of categories; track category) {
+      <button
+        type="button"
+        [class.is-active]="activeCategory === category"
+        [attr.aria-pressed]="activeCategory === category"
+        (click)="selectCategory(category)"
+        class="gallery-filters__button"
+        >
+        @if (category === 'Performances') {
+          <span aria-hidden="true">★</span>
+        } @else if (category === 'Events') {
+          <span aria-hidden="true">▣</span>
+        } @else if (category === 'Workshops') {
+          <span aria-hidden="true">✦</span>
+        }
+        {{ category }}
+      </button>
     }
+  </nav>
+
+  <section class="gallery-collection" id="gallery-collection" aria-labelledby="gallery-collection-title">
+    <div class="gallery-collection__heading">
+      <div>
+        <p class="gallery-collection__eyebrow"><span></span> LIFE AT THE STUDIO</p>
+        <h2 id="gallery-collection-title">Made of <em>moments.</em></h2>
+      </div>
+      <p class="gallery-collection__count">{{ visiblePhotos.length }} MOMENTS <span>IN MOTION</span></p>
+    </div>
+
+    <div class="gallery-grid" aria-label="Studio photo gallery">
+      @for (photo of visiblePhotos; track photo.number; let index = $index) {
+        <figure
+          class="gallery-card"
+          [class.gallery-card--tall]="index === 0 || index === 4"
+          [class.gallery-card--wide]="index === 2"
+          appScrollReveal
+        >
+          <button
+            class="gallery-card__button"
+            type="button"
+            (click)="openPhoto(index)"
+            [attr.aria-label]="'Open photo: ' + photo.title"
+          >
+            <img [src]="photo.image" [alt]="photo.imageAlt" loading="lazy" draggable="false" />
+            <span class="gallery-card__number">{{ photo.number }}</span>
+            <span class="gallery-card__caption">
+              <span>{{ photo.title }}</span>
+              <span class="gallery-card__category">{{ photo.category }}</span>
+            </span>
+            <span class="gallery-card__open" aria-hidden="true">↗</span>
+          </button>
+        </figure>
+      }
+    </div>
   </section>
 
-  <footer class="gallery-page__footer" appScrollReveal>
-    <p>Found your rhythm?</p>
-    <a routerLink="/" fragment="contact">Come dance with us <span aria-hidden="true">↗</span></a>
+  <dialog
+    #lightbox
+    class="gallery-lightbox"
+    aria-label="Photo viewer"
+    (click)="closeOnBackdrop($event)"
+    (close)="closePhoto()"
+  >
+    @if (selectedPhoto; as photo) {
+      <button
+        class="gallery-lightbox__close"
+        type="button"
+        aria-label="Close photo viewer"
+        (click)="closePhoto()"
+      >×</button>
+      <button
+        class="gallery-lightbox__nav gallery-lightbox__nav--previous"
+        type="button"
+        aria-label="Previous photo"
+        (click)="showPreviousPhoto()"
+      >←</button>
+      <figure class="gallery-lightbox__photo">
+        <img [src]="photo.image" [alt]="photo.imageAlt" />
+        <figcaption>
+          <span>{{ photo.title }} <small>{{ photo.category }}</small></span>
+          <span aria-live="polite">{{ selectedPhotoIndex! + 1 }} / {{ visiblePhotos.length }}</span>
+        </figcaption>
+      </figure>
+      <button
+        class="gallery-lightbox__nav gallery-lightbox__nav--next"
+        type="button"
+        aria-label="Next photo"
+        (click)="showNextPhoto()"
+      >→</button>
+    }
+  </dialog>
+
+  <footer class="gallery-footer">
+    <div class="gallery-footer__cta">
+      <p class="gallery-footer__eyebrow"><span></span> YOUR NEXT MOMENT STARTS HERE</p>
+      <h2>Join our <em>dance family.</em></h2>
+      <p>Let's create more amazing moments together.</p>
+      <a routerLink="/" fragment="contact">Contact us <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="gallery-footer__bottom">
+      <a class="gallery-brand gallery-brand--footer" routerLink="/" aria-label="Vino's Dance Studio home">
+        <span class="gallery-brand__mark" aria-hidden="true">V<span>D</span></span>
+        <span class="gallery-brand__name">VINO'S<small>DANCE STUDIO</small></span>
+      </a>
+      <p>Dance. <em>Dream.</em> Achieve.</p>
+      <a class="gallery-footer__top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
   </footer>
 </main>

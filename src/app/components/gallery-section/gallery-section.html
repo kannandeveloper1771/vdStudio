@@ -18,7 +18,7 @@
       <a class="gallery-preview__card" appScrollReveal routerLink="/gallery" [attr.aria-label]="'View photo: ' + photo.title">
         <img [src]="photo.image" [alt]="photo.imageAlt" loading="lazy" draggable="false" />
         <span class="gallery-preview__shade"></span>
-        <span class="gallery-preview__number">{{ photo.number }}</span>
+        <!-- <span class="gallery-preview__number">{{ photo.number }}</span> -->
         <span class="gallery-preview__caption">{{ photo.title }} <span aria-hidden="true">↗</span></span>
       </a>
     }
